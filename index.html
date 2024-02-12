@@ -625,21 +625,6 @@
       <!-- Include EmailJS library and initialize -->
 
       <!-- Add form submission event listener -->
-      <script type="text/javascript">
-        window.onload = function() {
-          document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            emailjs.sendForm('service_thrc1ie', 'template_4vy4knt', this)
-              .then(() => {
-                console.log('SUCCESS!');
-                document.querySelector('.sent-message').style.display = 'block';
-              }, (error) => {
-                console.log('FAILED...', error);
-                document.querySelector('.error-message').style.display = 'block';
-              });
-          });
-        }
-      </script>
 
       <form id="contact-form" action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
         <div class="row">
@@ -674,12 +659,22 @@
         publicKey: "sraYxLrUcvEAq4cIS",
       });
     })();
-
+  
     window.onload = function() {
       document.getElementById('contact-form').addEventListener('submit', function(event) {
         event.preventDefault();
-
-        emailjs.sendForm('service_thrc1ie', 'template_4vy4knt', this)
+  
+        // Collect form data
+        const formData = {
+          from_name: this.name.value,
+          from_email: this.email.value,
+          subject: this.subject.value,
+          message: this.message.value,
+          to_name: "Ifeoluwa", // You might need to replace this with the actual recipient's name
+        };
+  
+        // Send form data using EmailJS template
+        emailjs.send('service_thrc1ie', 'template_wifp52l', formData)
           .then(() => {
             console.log('SUCCESS!');
             showFeedbackMessage('.sent-message');
@@ -689,17 +684,18 @@
           });
       });
     }
-
+  
     function showFeedbackMessage(selector) {
       const messageElement = document.querySelector(selector);
       messageElement.style.display = 'block';
-
+  
       // Hide the message after 5 seconds
       setTimeout(() => {
         messageElement.style.display = 'none';
       }, 5000); // Adjust the duration as needed (in milliseconds)
     }
   </script>
+  
 
 
   <div class="credits">
