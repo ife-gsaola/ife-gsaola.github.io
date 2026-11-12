@@ -148,6 +148,18 @@ section { padding-block: 72px; border-bottom: 1px solid var(--line); }
 .copy { font-family: var(--font-mono); font-size: 0.72rem; background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 6px; padding: 4px 9px; cursor: pointer; }
 footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
+
+/* earlier data & ML work */
+.list { display: grid; gap: 0; }
+.item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; padding-block: 18px; border-top: 1px solid var(--line); align-items: baseline; }
+.item:first-child { border-top: 0; }
+.item h3 { font-size: var(--step-1); }
+.item p { color: var(--muted); grid-column: 1; max-width: 70ch; }
+.item .tags { grid-column: 1; }
+.item a.repo { font-family: var(--font-mono); font-size: 0.76rem; color: var(--onair); text-decoration: none; grid-row: 1; grid-column: 2; white-space: nowrap; }
+.item a.repo:hover { text-decoration: underline; }
+@media (max-width: 860px) { .item { grid-template-columns: minmax(0, 1fr); } .item a.repo { grid-row: auto; grid-column: 1; } }
+
 @media (max-width: 860px) {
   .hero, .project, .cols, .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .hero { padding-block: 28px 40px; }
@@ -169,6 +181,7 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
     <nav aria-label="Sections">
       <a href="#work">Work</a>
       <a href="#more">More</a>
+      <a href="#data">Data &amp; ML</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -301,6 +314,40 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <h3>Phone camera apps</h3>
         <p>iPhone and Android apps that turn a phone into a wireless camera for the studio, paired with a code and streamed over the local network.</p>
         <div class="tags"><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data">
+    <div class="head">
+      <h2>Data &amp; machine learning</h2>
+      <p>Earlier projects from my MSc and analyst work, with the code on GitHub.</p>
+    </div>
+    <div class="list">
+      <div class="item">
+        <h3>Food photo recogniser that answers out loud</h3><a class="repo" href="https://github.com/ife-gsaola/img_streamlit_app" target="_blank" rel="noopener">github / img_streamlit_app →</a>
+        <p>A convolutional neural network trained to recognise hundreds of dishes from an uploaded photo or the camera. It names the dish and reads the answer aloud in the language you choose. Built as a Flask web app and a Streamlit app.</p>
+        <div class="tags"><span>Python</span><span>TensorFlow / Keras</span><span>CNN</span><span>Flask</span><span>Streamlit</span><span>gTTS</span></div>
+      </div>
+      <div class="item">
+        <h3>Hugging Face language model on AWS</h3><a class="repo" href="https://github.com/ife-gsaola/hugging-face-llm" target="_blank" rel="noopener">github / hugging-face-llm →</a>
+        <p>A pre-trained Hugging Face model deployed as an AWS SageMaker endpoint, called through a Lambda function URL, with a React page for asking it questions.</p>
+        <div class="tags"><span>AWS SageMaker</span><span>Lambda</span><span>Hugging Face</span><span>React</span></div>
+      </div>
+      <div class="item">
+        <h3>Inventory data warehouse in SQL</h3><a class="repo" href="https://github.com/ife-gsaola/SQL" target="_blank" rel="noopener">github / SQL →</a>
+        <p>An ETL pipeline that loads raw inventory data into a staging layer and then an enterprise data warehouse layer with stored procedures, plus views for inventory analysis.</p>
+        <div class="tags"><span>SQL Server</span><span>ETL</span><span>Stored procedures</span><span>Data modelling</span></div>
+      </div>
+      <div class="item">
+        <h3>Machine learning coursework</h3><a class="repo" href="https://github.com/ife-gsaola/ai_projects" target="_blank" rel="noopener">github / ai_projects →</a>
+        <p>Credit-risk scoring, house-price regression, NBA rookie career prediction, sunspot time-series forecasting, country clustering, flower classification with a CNN, and a recommender built with matrix factorisation as a neural network.</p>
+        <div class="tags"><span>scikit-learn</span><span>Keras</span><span>Pandas</span><span>Clustering</span><span>Time series</span><span>NLP</span></div>
+      </div>
+      <div class="item">
+        <h3>Statistics in R</h3><a class="repo" href="https://github.com/ife-gsaola/Rcode_projects" target="_blank" rel="noopener">github / Rcode_projects →</a>
+        <p>Exploration of the 2021 England Census data as a Quarto report, and an analysis of melanoma data.</p>
+        <div class="tags"><span>R</span><span>tidyverse</span><span>ggplot2</span><span>Quarto</span></div>
       </div>
     </div>
   </section>
