@@ -224,13 +224,13 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
 .story p { color: var(--text); font-size: 0.96rem; line-height: 1.65; }
 
 /* architecture diagrams */
-.diagram { grid-column: 1 / -1; margin: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 8px 6px 4px; overflow-x: auto; }
-.flow { display: block; width: 100%; max-width: 900px; min-width: 560px; height: auto; margin: 0 auto; }
-.fl-h { font: 500 9px var(--font-mono); letter-spacing: 0.14em; fill: var(--muted); }
+.diagram { margin: 14px 0 0; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 16px 14px 10px; overflow-x: auto; }
+.flow { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
+.fl-h { font: 500 10px var(--font-mono); letter-spacing: 0.14em; fill: var(--muted); }
 .fl-n rect { fill: var(--ink); stroke: var(--line); }
 .fl-n.on rect { stroke: var(--onair); fill: color-mix(in srgb, var(--onair) 10%, var(--ink)); }
-.fl-t { font: 600 12px var(--font-body); fill: var(--text); }
-.fl-s { font: 400 9.5px var(--font-mono); fill: var(--muted); }
+.fl-t { font: 600 13.5px var(--font-body); fill: var(--text); }
+.fl-s { font: 400 10px var(--font-mono); fill: var(--muted); }
 .fl-w { fill: none; stroke: var(--line); stroke-width: 1.2; }
 .fl-p { fill: none; stroke: var(--onair); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 6 120; stroke-dashoffset: 126; opacity: 0.9; }
 @media (prefers-reduced-motion: no-preference) { .fl-p { animation: flow 2.4s linear infinite; } }
@@ -368,6 +368,51 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <span class="tally"><span class="dot" aria-hidden="true"></span> PROGRAM</span>
         <img src="assets/auracast-studio.jpg" alt="AuraCast Studio: camera switcher with preview, projector and live program output, the Sonic Core mixer with loudness metering, and scripture and background settings" width="1600" height="1004" loading="lazy">
       </div>
+        <figure class="diagram"><svg class="flow v" viewBox="0 0 480 336" role="img" aria-label="How AuraCast works">
+<text class="fl-h" x="0" y="16">HOW AURACAST WORKS</text>
+<path class="fl-w" d="M88 84 C88 99 164 99 164 114"/>
+<path class="fl-p" d="M88 84 C88 99 164 99 164 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M88 84 C88 99 316 99 316 114"/>
+<path class="fl-p" d="M88 84 C88 99 316 99 316 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M240 84 C240 99 164 99 164 114"/>
+<path class="fl-p" d="M240 84 C240 99 164 99 164 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M240 84 C240 99 316 99 316 114"/>
+<path class="fl-p" d="M240 84 C240 99 316 99 316 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M392 84 C392 99 164 99 164 114"/>
+<path class="fl-p" d="M392 84 C392 99 164 99 164 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M392 84 C392 99 316 99 316 114"/>
+<path class="fl-p" d="M392 84 C392 99 316 99 316 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M164 164 C164 179 164 179 164 194"/>
+<path class="fl-p" d="M164 164 C164 179 164 179 164 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M164 164 C164 179 316 179 316 194"/>
+<path class="fl-p" d="M164 164 C164 179 316 179 316 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M316 164 C316 179 164 179 164 194"/>
+<path class="fl-p" d="M316 164 C316 179 164 179 164 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M316 164 C316 179 316 179 316 194"/>
+<path class="fl-p" d="M316 164 C316 179 316 179 316 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M164 244 C164 259 88 259 88 274"/>
+<path class="fl-p" d="M164 244 C164 259 88 259 88 274" style="animation-delay:0.70s"/>
+<path class="fl-w" d="M164 244 C164 259 240 259 240 274"/>
+<path class="fl-p" d="M164 244 C164 259 240 259 240 274" style="animation-delay:0.70s"/>
+<path class="fl-w" d="M164 244 C164 259 392 259 392 274"/>
+<path class="fl-p" d="M164 244 C164 259 392 259 392 274" style="animation-delay:0.70s"/>
+<path class="fl-w" d="M316 244 C316 259 88 259 88 274"/>
+<path class="fl-p" d="M316 244 C316 259 88 259 88 274" style="animation-delay:0.70s"/>
+<path class="fl-w" d="M316 244 C316 259 240 259 240 274"/>
+<path class="fl-p" d="M316 244 C316 259 240 259 240 274" style="animation-delay:0.70s"/>
+<path class="fl-w" d="M316 244 C316 259 392 259 392 274"/>
+<path class="fl-p" d="M316 244 C316 259 392 259 392 274" style="animation-delay:0.70s"/>
+<g class="fl-n"><rect x="18" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="30" y="55">Phone cameras</text><text class="fl-s" x="30" y="72">Swift · Kotlin</text></g>
+<g class="fl-n"><rect x="170" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="55">USB / NDI cams</text><text class="fl-s" x="182" y="72">capture</text></g>
+<g class="fl-n"><rect x="322" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="334" y="55">Mics &amp; mixer</text><text class="fl-s" x="334" y="72">multi-channel</text></g>
+<g class="fl-n"><rect x="94" y="114" width="140" height="50" rx="8"/><text class="fl-t" x="106" y="135">Studio UI</text><text class="fl-s" x="106" y="152">React · WebRTC</text></g>
+<g class="fl-n"><rect x="246" y="114" width="140" height="50" rx="8"/><text class="fl-t" x="258" y="135">Speech + messages</text><text class="fl-s" x="258" y="152">ASR · parsing</text></g>
+<g class="fl-n on"><rect x="94" y="194" width="140" height="50" rx="8"/><text class="fl-t" x="106" y="215">AuraCast Engine</text><text class="fl-s" x="106" y="232">C++ · FFmpeg</text></g>
+<g class="fl-n on"><rect x="246" y="194" width="140" height="50" rx="8"/><text class="fl-t" x="258" y="215">Sonic Core</text><text class="fl-s" x="258" y="232">real-time DSP</text></g>
+<g class="fl-n"><rect x="18" y="274" width="140" height="50" rx="8"/><text class="fl-t" x="30" y="295">YouTube Live</text><text class="fl-s" x="30" y="312">RTMP · H.264</text></g>
+<g class="fl-n"><rect x="170" y="274" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="295">NDI</text><text class="fl-s" x="182" y="312">network video</text></g>
+<g class="fl-n"><rect x="322" y="274" width="140" height="50" rx="8"/><text class="fl-t" x="334" y="295">Projector</text><text class="fl-s" x="334" y="312">second screen</text></g>
+</svg></figure>
       </div>
       <div class="notes">
         <div class="kicker"><span class="label">Real-time video &amp; audio</span></div>
@@ -385,51 +430,6 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <div class="tags"><span>React</span><span>TypeScript</span><span>C++ engine</span><span>FFmpeg</span><span>Electron</span><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
         <div class="demo"><a class="btn" href="#contact">Ask about this project</a></div>
       </div>
-      <figure class="diagram"><svg class="flow" viewBox="0 0 638 208" role="img" aria-label="How AuraCast works">
-<text class="fl-h" x="16" y="18">HOW AURACAST WORKS</text>
-<path class="fl-w" d="M148 57 C161 57 161 85 174 85"/>
-<path class="fl-p" d="M148 57 C161 57 161 85 174 85" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 57 C161 57 161 141 174 141"/>
-<path class="fl-p" d="M148 57 C161 57 161 141 174 141" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 113 C161 113 161 85 174 85"/>
-<path class="fl-p" d="M148 113 C161 113 161 85 174 85" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 113 C161 113 161 141 174 141"/>
-<path class="fl-p" d="M148 113 C161 113 161 141 174 141" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 169 C161 169 161 85 174 85"/>
-<path class="fl-p" d="M148 169 C161 169 161 85 174 85" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 169 C161 169 161 141 174 141"/>
-<path class="fl-p" d="M148 169 C161 169 161 141 174 141" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M306 85 C319 85 319 85 332 85"/>
-<path class="fl-p" d="M306 85 C319 85 319 85 332 85" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M306 85 C319 85 319 141 332 141"/>
-<path class="fl-p" d="M306 85 C319 85 319 141 332 141" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M306 141 C319 141 319 85 332 85"/>
-<path class="fl-p" d="M306 141 C319 141 319 85 332 85" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M306 141 C319 141 319 141 332 141"/>
-<path class="fl-p" d="M306 141 C319 141 319 141 332 141" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M464 85 C477 85 477 57 490 57"/>
-<path class="fl-p" d="M464 85 C477 85 477 57 490 57" style="animation-delay:0.70s"/>
-<path class="fl-w" d="M464 85 C477 85 477 113 490 113"/>
-<path class="fl-p" d="M464 85 C477 85 477 113 490 113" style="animation-delay:0.70s"/>
-<path class="fl-w" d="M464 85 C477 85 477 169 490 169"/>
-<path class="fl-p" d="M464 85 C477 85 477 169 490 169" style="animation-delay:0.70s"/>
-<path class="fl-w" d="M464 141 C477 141 477 57 490 57"/>
-<path class="fl-p" d="M464 141 C477 141 477 57 490 57" style="animation-delay:0.70s"/>
-<path class="fl-w" d="M464 141 C477 141 477 113 490 113"/>
-<path class="fl-p" d="M464 141 C477 141 477 113 490 113" style="animation-delay:0.70s"/>
-<path class="fl-w" d="M464 141 C477 141 477 169 490 169"/>
-<path class="fl-p" d="M464 141 C477 141 477 169 490 169" style="animation-delay:0.70s"/>
-<g class="fl-n"><rect x="16" y="34" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="53">Phone cameras</text><text class="fl-s" x="26" y="69">Swift · Kotlin</text></g>
-<g class="fl-n"><rect x="16" y="90" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="109">USB / NDI cams</text><text class="fl-s" x="26" y="125">capture</text></g>
-<g class="fl-n"><rect x="16" y="146" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="165">Mics &amp; mixer</text><text class="fl-s" x="26" y="181">multi-channel</text></g>
-<g class="fl-n"><rect x="174" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="184" y="81">Studio UI</text><text class="fl-s" x="184" y="97">React · WebRTC</text></g>
-<g class="fl-n"><rect x="174" y="118" width="132" height="46" rx="8"/><text class="fl-t" x="184" y="137">Speech + messages</text><text class="fl-s" x="184" y="153">ASR · parsing</text></g>
-<g class="fl-n on"><rect x="332" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="342" y="81">AuraCast Engine</text><text class="fl-s" x="342" y="97">C++ · FFmpeg</text></g>
-<g class="fl-n on"><rect x="332" y="118" width="132" height="46" rx="8"/><text class="fl-t" x="342" y="137">Sonic Core</text><text class="fl-s" x="342" y="153">real-time DSP</text></g>
-<g class="fl-n"><rect x="490" y="34" width="132" height="46" rx="8"/><text class="fl-t" x="500" y="53">YouTube Live</text><text class="fl-s" x="500" y="69">RTMP · H.264</text></g>
-<g class="fl-n"><rect x="490" y="90" width="132" height="46" rx="8"/><text class="fl-t" x="500" y="109">NDI</text><text class="fl-s" x="500" y="125">network video</text></g>
-<g class="fl-n"><rect x="490" y="146" width="132" height="46" rx="8"/><text class="fl-t" x="500" y="165">Projector</text><text class="fl-s" x="500" y="181">second screen</text></g>
-</svg></figure>
     </article>
 
     <article class="project flip">
@@ -439,6 +439,24 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <img src="assets/autoverses-app.jpg" alt="Auto Verses control window: hearing and speech model on the left, the screen preview in the middle, guesses to check and backgrounds on the right" width="1600" height="948" loading="lazy">
         <figure class="pip"><img src="assets/autoverses-screen.jpg" alt="What the projector shows: Romans 8:28-31 on a moving background" width="789" height="444" loading="lazy"><figcaption>On the projector</figcaption></figure>
       </div>
+        <figure class="diagram"><svg class="flow v" viewBox="0 0 480 336" role="img" aria-label="How Auto Verses works">
+<text class="fl-h" x="0" y="16">HOW AUTO VERSES WORKS</text>
+<path class="fl-w" d="M240 84 C240 99 164 99 164 114"/>
+<path class="fl-p" d="M240 84 C240 99 164 99 164 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M240 84 C240 99 316 99 316 114"/>
+<path class="fl-p" d="M240 84 C240 99 316 99 316 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M164 164 C164 179 240 179 240 194"/>
+<path class="fl-p" d="M164 164 C164 179 240 179 240 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M316 164 C316 179 240 179 240 194"/>
+<path class="fl-p" d="M316 164 C316 179 240 179 240 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M240 244 C240 259 240 259 240 274"/>
+<path class="fl-p" d="M240 244 C240 259 240 259 240 274" style="animation-delay:0.70s"/>
+<g class="fl-n"><rect x="170" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="55">Streaming ASR</text><text class="fl-s" x="182" y="72">Web Speech · Whisper</text></g>
+<g class="fl-n on"><rect x="94" y="114" width="140" height="50" rx="8"/><text class="fl-t" x="106" y="135">Phonetic matcher</text><text class="fl-s" x="106" y="152">sound-key match</text></g>
+<g class="fl-n on"><rect x="246" y="114" width="140" height="50" rx="8"/><text class="fl-t" x="258" y="135">Semantic search</text><text class="fl-s" x="258" y="152">MiniLM embeddings</text></g>
+<g class="fl-n"><rect x="170" y="194" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="215">Context tracker</text><text class="fl-s" x="182" y="232">follow-ups · ranges</text></g>
+<g class="fl-n"><rect x="170" y="274" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="295">Screen + NDI</text><text class="fl-s" x="182" y="312">34 text sources</text></g>
+</svg></figure>
       </div>
       <div class="notes">
         <div class="kicker"><span class="label">Speech AI · NLP</span></div>
@@ -456,24 +474,6 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <div class="tags"><span>TypeScript</span><span>Web Speech</span><span>Whisper</span><span>MiniLM</span><span>Transformers.js</span><span>Electron</span><span>NDI</span></div>
         <div class="demo"><a class="btn" href="#contact">Ask about this project</a></div>
       </div>
-      <figure class="diagram"><svg class="flow" viewBox="0 0 638 152" role="img" aria-label="How Auto Verses works">
-<text class="fl-h" x="16" y="18">HOW AUTO VERSES WORKS</text>
-<path class="fl-w" d="M148 85 C161 85 161 57 174 57"/>
-<path class="fl-p" d="M148 85 C161 85 161 57 174 57" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 85 C161 85 161 113 174 113"/>
-<path class="fl-p" d="M148 85 C161 85 161 113 174 113" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M306 57 C319 57 319 85 332 85"/>
-<path class="fl-p" d="M306 57 C319 57 319 85 332 85" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M306 113 C319 113 319 85 332 85"/>
-<path class="fl-p" d="M306 113 C319 113 319 85 332 85" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M464 85 C477 85 477 85 490 85"/>
-<path class="fl-p" d="M464 85 C477 85 477 85 490 85" style="animation-delay:0.70s"/>
-<g class="fl-n"><rect x="16" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="81">Streaming ASR</text><text class="fl-s" x="26" y="97">mic · Web Speech · Whisper</text></g>
-<g class="fl-n on"><rect x="174" y="34" width="132" height="46" rx="8"/><text class="fl-t" x="184" y="53">Phonetic matcher</text><text class="fl-s" x="184" y="69">sound keys · edit dist</text></g>
-<g class="fl-n on"><rect x="174" y="90" width="132" height="46" rx="8"/><text class="fl-t" x="184" y="109">Semantic search</text><text class="fl-s" x="184" y="125">MiniLM embeddings</text></g>
-<g class="fl-n"><rect x="332" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="342" y="81">Context tracker</text><text class="fl-s" x="342" y="97">follow-ups · ranges</text></g>
-<g class="fl-n"><rect x="490" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="500" y="81">Screen + NDI</text><text class="fl-s" x="500" y="97">34 text sources</text></g>
-</svg></figure>
     </article>
 
     <article class="project">
@@ -492,6 +492,22 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
           <div class="card diff"><span>Suggested change</span><span><s>Helped with daily tasks</s> <ins>Supported 12 residents with personal care and mobility, following care plans</ins></span></div>
         </div>
       </div>
+        <figure class="diagram"><svg class="flow v" viewBox="0 0 480 336" role="img" aria-label="How ApplyPilot works">
+<text class="fl-h" x="0" y="16">HOW APPLYPILOT WORKS</text>
+<path class="fl-w" d="M164 84 C164 99 240 99 240 114"/>
+<path class="fl-p" d="M164 84 C164 99 240 99 240 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M316 84 C316 99 240 99 240 114"/>
+<path class="fl-p" d="M316 84 C316 99 240 99 240 114" style="animation-delay:0.00s"/>
+<path class="fl-w" d="M240 164 C240 179 240 179 240 194"/>
+<path class="fl-p" d="M240 164 C240 179 240 179 240 194" style="animation-delay:0.35s"/>
+<path class="fl-w" d="M240 244 C240 259 240 259 240 274"/>
+<path class="fl-p" d="M240 244 C240 259 240 259 240 274" style="animation-delay:0.70s"/>
+<g class="fl-n"><rect x="94" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="106" y="55">Job sources</text><text class="fl-s" x="106" y="72">APIs · careers pages</text></g>
+<g class="fl-n"><rect x="246" y="34" width="140" height="50" rx="8"/><text class="fl-t" x="258" y="55">Watched sites</text><text class="fl-s" x="258" y="72">new-role alerts</text></g>
+<g class="fl-n on"><rect x="170" y="114" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="135">LLM tailoring</text><text class="fl-s" x="182" y="152">diffs · guardrails</text></g>
+<g class="fl-n"><rect x="170" y="194" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="215">CV &amp; letters</text><text class="fl-s" x="182" y="232">rich text · LaTeX</text></g>
+<g class="fl-n"><rect x="170" y="274" width="140" height="50" rx="8"/><text class="fl-t" x="182" y="295">MV3 extension</text><text class="fl-s" x="182" y="312">fills · you submit</text></g>
+</svg></figure>
       </div>
       <div class="notes">
         <div class="kicker"><span class="label">LLM applications</span></div>
@@ -509,22 +525,6 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <div class="tags"><span>React</span><span>TypeScript</span><span>Supabase</span><span>Vercel</span><span>Chrome extension</span><span>LLMs</span><span>LaTeX</span></div>
         <div class="demo"><a class="btn" href="#contact">Ask about this project</a></div>
       </div>
-      <figure class="diagram"><svg class="flow" viewBox="0 0 638 152" role="img" aria-label="How ApplyPilot works">
-<text class="fl-h" x="16" y="18">HOW APPLYPILOT WORKS</text>
-<path class="fl-w" d="M148 57 C161 57 161 85 174 85"/>
-<path class="fl-p" d="M148 57 C161 57 161 85 174 85" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M148 113 C161 113 161 85 174 85"/>
-<path class="fl-p" d="M148 113 C161 113 161 85 174 85" style="animation-delay:0.00s"/>
-<path class="fl-w" d="M306 85 C319 85 319 85 332 85"/>
-<path class="fl-p" d="M306 85 C319 85 319 85 332 85" style="animation-delay:0.35s"/>
-<path class="fl-w" d="M464 85 C477 85 477 85 490 85"/>
-<path class="fl-p" d="M464 85 C477 85 477 85 490 85" style="animation-delay:0.70s"/>
-<g class="fl-n"><rect x="16" y="34" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="53">Job sources</text><text class="fl-s" x="26" y="69">APIs · careers pages</text></g>
-<g class="fl-n"><rect x="16" y="90" width="132" height="46" rx="8"/><text class="fl-t" x="26" y="109">Watched sites</text><text class="fl-s" x="26" y="125">new-role alerts</text></g>
-<g class="fl-n on"><rect x="174" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="184" y="81">LLM tailoring</text><text class="fl-s" x="184" y="97">diffs · guardrails</text></g>
-<g class="fl-n"><rect x="332" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="342" y="81">CV &amp; letters</text><text class="fl-s" x="342" y="97">rich text · LaTeX</text></g>
-<g class="fl-n"><rect x="490" y="62" width="132" height="46" rx="8"/><text class="fl-t" x="500" y="81">MV3 extension</text><text class="fl-s" x="500" y="97">fills · you submit</text></g>
-</svg></figure>
     </article>
   </section>
 
