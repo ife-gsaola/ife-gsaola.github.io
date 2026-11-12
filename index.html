@@ -16,11 +16,12 @@
   --ink: #0e1420;        /* page */
   --panel: #151d2c;      /* raised surfaces */
   --line: #263247;       /* hairlines */
-  --text: #e6eaf2;
-  --muted: #94a0b6;
-  --onair: #f5a524;      /* the tally light */
-  --onair-ink: #1b1305;  /* text on amber */
-  --live: #ef4d4d;       /* recording dot */
+  --text: #f3ead8;        /* warm cream lettering */
+  --muted: #a89f92;       /* soft warm grey */
+  --onair: #ff4d3d;       /* the tally light */
+  --onair-ink: #1a0705;   /* text on red */
+  --live: #ff4d3d;        /* recording dot */
+  --amber: #f5a524;       /* small warm details: the lens */
   --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
   --font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
@@ -29,13 +30,13 @@
 }
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #121a28; --muted: #56627a;
-    --onair: #c97a00; --onair-ink: #ffffff; --live: #d63434; color-scheme: light;
+    --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #2a2118; --muted: #6e655a;
+    --onair: #d93a2b; --onair-ink: #ffffff; --live: #d93a2b; --amber: #d98a0b; color-scheme: light;
   }
 }
 :root[data-theme="light"] {
-  --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #121a28; --muted: #56627a;
-  --onair: #c97a00; --onair-ink: #ffffff; --live: #d63434; color-scheme: light;
+  --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #2a2118; --muted: #6e655a;
+  --onair: #d93a2b; --onair-ink: #ffffff; --live: #d93a2b; --amber: #d98a0b; color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -104,7 +105,7 @@ p { margin: 0; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
 /* a cut-out portrait (transparent background) comes out of the top of the lens */
 .stage.cut .portrait { overflow: visible; background: none; box-shadow: none; border-radius: 0; }
-.stage.cut .portrait::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(75% 75% at 50% 28%, color-mix(in srgb, var(--onair) 85%, #fff 15%) 0%, var(--onair) 38%, color-mix(in srgb, var(--onair) 45%, var(--ink)) 100%); box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.55), 0 0 0 6px var(--ink), 0 0 0 7px var(--line); }
+.stage.cut .portrait::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(75% 75% at 50% 28%, color-mix(in srgb, var(--amber) 85%, #fff 15%) 0%, var(--amber) 38%, color-mix(in srgb, var(--amber) 45%, var(--ink)) 100%); box-shadow: 0 30px 70px -25px rgba(0, 0, 0, 0.55), 0 0 0 6px var(--ink), 0 0 0 7px var(--line); }
 .stage.cut .portrait img { position: absolute; left: -9%; bottom: 0; width: 118%; height: auto; aspect-ratio: 1; object-fit: contain; filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.4));
   -webkit-mask-image: radial-gradient(42.4% 42.4% at 50% 57.6%, #000 99.5%, transparent 100%), linear-gradient(#000, #000);
           mask-image: radial-gradient(42.4% 42.4% at 50% 57.6%, #000 99.5%, transparent 100%), linear-gradient(#000, #000);
@@ -307,9 +308,9 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
       <svg class="lens" viewBox="0 0 400 400">
         <defs>
           <radialGradient id="glow" cx="50%" cy="45%" r="55%">
-            <stop offset="0" stop-color="var(--onair)" stop-opacity="0.38"/>
-            <stop offset="0.6" stop-color="var(--onair)" stop-opacity="0.08"/>
-            <stop offset="1" stop-color="var(--onair)" stop-opacity="0"/>
+            <stop offset="0" stop-color="var(--amber)" stop-opacity="0.38"/>
+            <stop offset="0.6" stop-color="var(--amber)" stop-opacity="0.08"/>
+            <stop offset="1" stop-color="var(--amber)" stop-opacity="0"/>
           </radialGradient>
         </defs>
         <circle cx="200" cy="200" r="198" fill="url(#glow)"/>
