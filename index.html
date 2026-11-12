@@ -214,6 +214,11 @@ section { padding-block: 72px; border-bottom: 1px solid var(--line); }
 footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 
+/* picture-in-picture inset on a screenshot */
+.pip { position: absolute; right: 12px; bottom: 12px; width: 38%; margin: 0; border-radius: 8px; overflow: hidden; border: 2px solid var(--onair); box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.6); background: #000; }
+.pip img { display: block; width: 100%; height: auto; }
+.pip figcaption { position: absolute; left: 6px; top: 6px; font-family: var(--font-mono); font-size: 0.56rem; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: rgba(11, 15, 23, 0.7); padding: 2px 7px; border-radius: 999px; }
+
 /* behind the build */
 .story { border-left: 3px solid var(--onair); padding: 4px 0 4px 16px; display: grid; gap: 6px; }
 .story p { color: var(--text); font-size: 0.96rem; line-height: 1.65; }
@@ -430,8 +435,9 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
     <article class="project flip">
       <div class="media">
       <div class="screen">
-        <span class="tally"><span class="dot" aria-hidden="true"></span> ON SCREEN</span>
-        <img src="assets/autoverses-screen.jpg" alt="Auto Verses screen showing Romans 8:28-31 on a moving cross background" width="789" height="444" loading="lazy">
+        <span class="tally"><span class="dot" aria-hidden="true"></span> CONTROL</span>
+        <img src="assets/autoverses-app.jpg" alt="Auto Verses control window: hearing and speech model on the left, the screen preview in the middle, guesses to check and backgrounds on the right" width="1600" height="948" loading="lazy">
+        <figure class="pip"><img src="assets/autoverses-screen.jpg" alt="What the projector shows: Romans 8:28-31 on a moving background" width="789" height="444" loading="lazy"><figcaption>On the projector</figcaption></figure>
       </div>
       </div>
       <div class="notes">
