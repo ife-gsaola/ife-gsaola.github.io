@@ -196,7 +196,9 @@ section { padding-block: 72px; border-bottom: 1px solid var(--line); }
 .tile p { color: var(--muted); }
 
 /* experience */
-.timeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.timeline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.job .tags { margin-top: 14px; }
+@media (max-width: 760px) { .timeline { grid-template-columns: minmax(0, 1fr); } }
 .job { display: grid; grid-template-rows: auto 1fr; gap: 10px; align-content: start; padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .job > .mono { color: var(--onair); font-size: 0.78rem; }
 .job h3 { font-size: var(--step-1); }
@@ -607,37 +609,44 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
           <div class="job">
             <span class="mono">2025 – now</span>
             <div><h3>AI engineer, independent products</h3><p class="where">Self-directed · AuraCast Studio, Auto Verses, ApplyPilot, Sanctuary</p>
-              <ul><li>Designed and shipped four production systems end to end: real-time speech AI, a native C++ video engine, LLM application pipelines and a multi-tenant platform</li><li>Write the product briefs, rules and tests, and build with AI coding agents, reviewing every change before it is merged</li></ul></div>
+              <ul><li>Designed and shipped four production systems end to end: real-time speech AI, a native C++ video engine, LLM application pipelines and a multi-tenant platform</li><li>Write the product briefs, rules and tests, and build with AI coding agents, reviewing every change before it is merged</li></ul>
+              <div class="tags"><span>TypeScript</span><span>React</span><span>C++</span><span>FFmpeg</span><span>Electron</span><span>Supabase</span><span>Whisper</span><span>MiniLM</span><span>LLMs</span><span>Swift</span><span>Kotlin</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2026 – now</span>
             <div><h3>Carer</h3><p class="where">Care UK, Birmingham</p>
-              <ul><li>Person-centred care in a high-accountability setting; accurate, confidential records kept to information-governance standards</li></ul></div>
+              <ul><li>Person-centred care in a high-accountability setting; accurate, confidential records kept to information-governance standards</li></ul>
+              <div class="tags"><span>Record keeping</span><span>Information governance</span><span>Confidentiality</span><span>Prioritising under pressure</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2025 – 2026</span>
             <div><h3>Cloud &amp; data engineering</h3><p class="where">Professional development</p>
-              <ul><li>Upskilled in Azure, AWS, Databricks and Apache Kafka</li><li>Google Project Management and IBM Database Administrator certificates (Coursera, 2025)</li><li>Independent data modelling and warehousing projects</li></ul></div>
+              <ul><li>Upskilled in Azure, AWS, Databricks and Apache Kafka</li><li>Google Project Management and IBM Database Administrator certificates (Coursera, 2025)</li><li>Independent data modelling and warehousing projects</li></ul>
+              <div class="tags"><span>Azure</span><span>AWS</span><span>Databricks</span><span>Apache Kafka</span><span>Data modelling</span><span>Data warehousing</span><span>Project management</span><span>Database administration</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2024 – 2025</span>
             <div><h3>Embedded software training</h3><p class="where">TekTrain, online</p>
-              <ul><li>Programmed ESP32 and Arduino microcontrollers in C++, from writing to flashing firmware on the device</li><li>Read and processed temperature, weather and humidity sensors in embedded code</li></ul></div>
+              <ul><li>Programmed ESP32 and Arduino microcontrollers in C++, from writing to flashing firmware on the device</li><li>Read and processed temperature, weather and humidity sensors in embedded code</li></ul>
+              <div class="tags"><span>C++</span><span>ESP32</span><span>Arduino</span><span>Firmware</span><span>Sensors</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2020 – 2023</span>
             <div><h3>Operations Data Analyst</h3><p class="where">SecureID Limited, Nigeria</p>
-              <ul><li>Built automated dashboards that replaced manual Excel reporting across production, quality and inventory</li><li>Designed SQL to reconcile operational and financial data, raising confidence in the numbers reported to senior management</li><li>Presented trend analysis that supported cost-control and capacity-planning decisions</li></ul></div>
+              <ul><li>Built automated dashboards that replaced manual Excel reporting across production, quality and inventory</li><li>Designed SQL to reconcile operational and financial data, raising confidence in the numbers reported to senior management</li><li>Presented trend analysis that supported cost-control and capacity-planning decisions</li></ul>
+              <div class="tags"><span>SQL</span><span>Power BI</span><span>Excel</span><span>Dashboards</span><span>Reconciliation</span><span>KPI reporting</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2020 – 2021</span>
             <div><h3>Data Management Executive</h3><p class="where">Ipsos, Nigeria</p>
-              <ul><li>Automated manual quality checks with SQL validation and cleansing logic</li><li>Standardised data-integrity checks (straight-lining, outliers) in SQL, SPSS and Excel</li></ul></div>
+              <ul><li>Automated manual quality checks with SQL validation and cleansing logic</li><li>Standardised data-integrity checks (straight-lining, outliers) in SQL, SPSS and Excel</li></ul>
+              <div class="tags"><span>SQL</span><span>SPSS</span><span>Excel</span><span>Data validation</span><span>Data cleansing</span><span>Data quality</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2025</span>
             <div><h3>MSc Artificial Intelligence</h3><p class="where">University of Wolverhampton</p>
-              <ul><li>Reinforcement learning, neural networks, supervised and unsupervised learning; simulation-based RL agents in Unity (C#)</li></ul></div>
+              <ul><li>Reinforcement learning, neural networks, supervised and unsupervised learning; simulation-based RL agents in Unity (C#)</li></ul>
+              <div class="tags"><span>Python</span><span>Reinforcement learning</span><span>Neural networks</span><span>Unity</span><span>C#</span><span>Model evaluation</span></div></div>
           </div>
           <div class="job">
             <span class="mono">2019</span>
