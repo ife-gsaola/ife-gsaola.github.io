@@ -1,755 +1,386 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saola Gbenga Ifeoluwa</title>
+<meta name="description" content="Saola Gbenga Ifeoluwa - AI engineer building real products: a live broadcast studio, speech-to-scripture detection and an AI job-application assistant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a broadcast control-room page - one left-aligned column, each project a "channel"
+   with a live screen beside its notes; amber is the on-air light, used sparingly. */
+:root {
+  --ink: #0e1420;        /* page */
+  --panel: #151d2c;      /* raised surfaces */
+  --line: #263247;       /* hairlines */
+  --text: #e6eaf2;
+  --muted: #94a0b6;
+  --onair: #f5a524;      /* the tally light */
+  --onair-ink: #1b1305;  /* text on amber */
+  --live: #ef4d4d;       /* recording dot */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --step--1: 0.84rem; --step-0: 1rem; --step-1: 1.2rem; --step-2: 1.6rem; --step-3: 2.3rem; --step-4: clamp(2.6rem, 6vw, 4.4rem);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #121a28; --muted: #56627a;
+    --onair: #c97a00; --onair-ink: #ffffff; --live: #d63434; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --ink: #f4f6fa; --panel: #ffffff; --line: #d9dfea; --text: #121a28; --muted: #56627a;
+  --onair: #c97a00; --onair-ink: #ffffff; --live: #d63434; color-scheme: light;
+}
 
-  <title>Saola Gbenga Ifeoluwa</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--ink); color: var(--text);
+  font: 400 var(--step-0)/1.65 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--onair); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.08; letter-spacing: -0.01em; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.02em; }
+.label { font-family: var(--font-mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); }
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+/* top bar */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; flex-wrap: wrap; }
+.bar nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.bar nav a { text-decoration: none; color: var(--muted); font-size: var(--step--1); }
+.bar nav a:hover { color: var(--text); }
+.status { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--live); box-shadow: 0 0 0 4px color-mix(in srgb, var(--live) 22%, transparent); }
+@media (prefers-reduced-motion: no-preference) { .dot { animation: blink 2.4s ease-in-out infinite; } }
+@keyframes blink { 50% { opacity: 0.35; } }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: end; padding-block: 48px 56px; border-bottom: 1px solid var(--line); }
+.hero h1 { font-size: var(--step-4); font-weight: 800; }
+.hero h1 span { color: var(--onair); }
+.hero .lede { font-size: var(--step-1); color: var(--muted); max-width: 60ch; margin-top: 20px; }
+.hero .lede b { color: var(--text); font-weight: 600; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: var(--step--1); border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; font-family: var(--font-body); }
+.btn.primary { background: var(--onair); border-color: var(--onair); color: var(--onair-ink); }
+.btn:hover { border-color: var(--onair); }
+.me { width: 100%; max-width: 260px; aspect-ratio: 1; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); filter: saturate(0.9); }
+.facts { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 36px; }
+.facts div { display: grid; }
+.facts b { font-family: var(--font-display); font-size: var(--step-2); }
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+/* sections */
+section { padding-block: 72px; border-bottom: 1px solid var(--line); }
+.head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+.head h2 { font-size: var(--step-3); }
+.head p { color: var(--muted); max-width: 52ch; }
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+/* a project: screen + notes */
+.project { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 44px; align-items: start; padding-block: 44px; }
+.project + .project { border-top: 1px dashed var(--line); }
+.project.flip .screen { order: 2; }
+.screen { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--panel); }
+.screen img { display: block; width: 100%; height: auto; }
+.screen .tally { position: absolute; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 6px; background: color-mix(in srgb, var(--ink) 82%, transparent); color: var(--text); padding: 4px 10px; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; }
+.inset { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.inset img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; }
+.notes { display: grid; gap: 18px; min-width: 0; }
+.kicker { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.notes h3 { font-size: var(--step-3); }
+.notes .what { font-size: var(--step-1); color: var(--muted); }
+.notes ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; }
+.notes li::marker { color: var(--onair); }
+.spec { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--panel); overflow-x: auto; white-space: nowrap; }
+.spec b { color: var(--onair); font-weight: 500; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { font-family: var(--font-mono); font-size: 0.74rem; padding: 4px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+.demo { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.demo small { color: var(--muted); }
 
+/* drawn screens for projects without a screenshot yet */
+.mock { padding: 52px 22px 22px; display: grid; gap: 14px; background: linear-gradient(160deg, color-mix(in srgb, var(--onair) 9%, var(--panel)), var(--panel) 55%); min-height: 300px; }
+.mock .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.mock .card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--ink); display: grid; gap: 6px; }
+.mock .card b { font-family: var(--font-display); font-size: var(--step-0); }
+.mock .pill { font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+.mock .pill.on { background: var(--onair); border-color: var(--onair); color: var(--onair-ink); }
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.steps div { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--ink); font-size: 0.8rem; display: grid; gap: 4px; }
+.steps div i { font-style: normal; font-family: var(--font-mono); font-size: 0.68rem; color: var(--onair); }
+.diff { font-family: var(--font-mono); font-size: 0.76rem; line-height: 1.6; }
+.diff s { color: var(--muted); }
+.diff ins { text-decoration: none; color: var(--onair); }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.grid3 .card span { color: var(--muted); font-size: 0.78rem; }
+
+/* more work */
+.more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.tile { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: var(--panel); display: grid; gap: 10px; align-content: start; }
+.tile h3 { font-size: var(--step-1); }
+.tile p { color: var(--muted); }
+
+/* experience */
+.timeline { display: grid; gap: 0; }
+.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding-block: 22px; border-top: 1px solid var(--line); }
+.job:first-child { border-top: 0; }
+.job h3 { font-size: var(--step-1); }
+.job .where { color: var(--muted); margin-top: 2px; }
+.job ul { margin: 10px 0 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(--muted); }
+.job li::marker { color: var(--onair); }
+.cols { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; }
+.skills { display: grid; gap: 18px; }
+.skills > div { display: grid; gap: 8px; }
+
+/* contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+.contact h2 { font-size: var(--step-3); }
+.lines { display: grid; gap: 12px; }
+.line { display: flex; justify-content: space-between; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--panel); flex-wrap: wrap; }
+.line span { user-select: all; overflow-wrap: anywhere; }
+.copy { font-family: var(--font-mono); font-size: 0.72rem; background: transparent; border: 1px solid var(--line); color: var(--muted); border-radius: 6px; padding: 4px 9px; cursor: pointer; }
+footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero, .project, .cols, .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero { padding-block: 28px 40px; }
+  .me { max-width: 180px; order: -1; }
+  .project.flip .screen { order: 0; }
+  .more { grid-template-columns: minmax(0, 1fr); }
+  .job { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid3 { grid-template-columns: minmax(0, 1fr); }
+  section { padding-block: 52px; }
+}
+</style>
 </head>
-
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    
-    <div class="container">
+<div class="wrap">
+  <header class="bar">
+    <span class="status label"><span class="dot" aria-hidden="true"></span> Open to AI &amp; software roles · UK</span>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#more">More</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-          <div class="row align-items-center">
-            <div class="col">
-              <h1><a href="index.html">Saola Gbenga Ifeoluwa</a></h1>
-              
-              <h2>I'm an <span> AI & Data Science </span> enthausiast in the UK </h2>
-              <h2>Welcome to my portfolio</h2>
-            </div>
-            <div class="col text-end">
-              <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
-            </div>
-          </div>
-
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link active" href="#header">Home</a></li>
-            <li><a class="nav-link" href="#about">About</a></li>
-            <li><a class="nav-link" href="#resume">Resume</a></li>
-            <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
-            <li><a class="nav-link" href="#contact">Contact</a></li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-        <div class="social-links">
-          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-
+  <div class="hero">
+    <div>
+      <p class="label">Saola Gbenga Ifeoluwa · MSc Artificial Intelligence</p>
+      <h1>I build AI products that work <span>live</span>, in front of people.</h1>
+      <p class="lede">A broadcast studio that streams church services in up to 4K. An app that hears a preacher say <b>"turn to Ephesians 3:6"</b> and puts the verse on the screen before the sentence ends. An assistant that tailors a CV to every job and fills in the application. I design each product end to end and build it with AI coding agents.</p>
+      <div class="cta">
+        <a class="btn primary" href="#work">See the work</a>
+        <a class="btn" href="#contact">Ask for demo access</a>
       </div>
-  </header><!-- End Header -->
-
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-
-    <!-- ======= About Me ======= -->
-    <div class="about-me container">
-
-      <div class="section-title">
-        <h2>About</h2>
-        <p>More about me</p>
+      <div class="facts">
+        <div><b>4</b><span class="label">products shipped</span></div>
+        <div><b>34</b><span class="label">Bible versions by voice</span></div>
+        <div><b>53</b><span class="label">cloud functions in Sanctuary</span></div>
       </div>
-
-      <div class="row">
-        <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/img/me.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <h3>AI &amp; Data Scientist</h3>
-          <p class="fst-italic">
-            I'm a passionate Data Analyst who loves digging into data to find insight that can make a 
-            difference. I love turning numbers into doable strategies that help businesses make smarter 
-            decisions and run smoothly. 
-            
-            I have implemented robust data quality checks, production planning, process optimization, and 
-            analytics techniques across manufacturing and market research sectors, that has resulted in 
-            significant increase in cost savings, throughput, and revenue.
-            
-            I have managed research projects across FMCGs, healthcare, and government agencies, 
-            delivering impactful solutions. I am committed to delivering high-quality results through data-
-            driven strategies.
-            
-            I'm currently pursuing MSc in Artificial Intelligence at University of Wolverhampton to broaden 
-            my knowledge of AI implementation and practices. This program is all about getting hands-on 
-            with the latest AI technology and methods, setting me up nicely for roles where I'll be putting AI 
-            into action. From machine learning to natural language processing and computer vision.
-            I'm excited to use what I'm learning to tackle tough problems and bring fresh ideas to data-
-            driven decision-making. I seek opportunity to work on industry-based AI projects through 
-            an internship or fellowships to further enhance my knowledge of how industries implement AI, to 
-            further qualify me for employment in the field of AI.
-
-          </p>
-          <div class="row">
-            <div class="col-lg-6">
-              <ul>
-
-                <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>https://ife-gsaola.github.io</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+447780250588</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Wolverhampton, United Kingdom</span></li>
-              </ul>
-            </div>
-            <div class="col-lg-6">
-              <ul>
-            
-                <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Msc. Artificial Intelligence</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>saolagbengaifeoluwa@gmail.com</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Collaboration:</strong> <span>Available</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- End About Me -->
-
-    <!-- ======= Counts ======= -->
-    <div class="counts container">
-
-      <div class="row">
-
-        <div class="col-lg-4 col-md-6 mt-5 mt-md-0">
-          <div class="count-box">
-            <i class="bi bi-journal-richtext"></i>
-            <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Projects</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mt-5 mt-lg-0">
-          <div class="count-box">
-            <i class="bi bi-headset"></i>
-            <span data-purecounter-start="0" data-purecounter-end="5" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Years of Experience</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 mt-5 mt-lg-0">
-          <div class="count-box">
-            <i class="bi bi-award"></i>
-            <span data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="1" class="purecounter"></span>
-            <p>Awards</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div><!-- End Counts -->
-
-    <!-- ======= Skills  ======= -->
-    <div class="skills container">
-
-      <div class="section-title">
-        <h2>Skills</h2>
-      </div>
-
-      <div class="row skills-content">
-
-        <div class="col-lg-6">
-
-          <div class="progress">
-            <span class="skill">Python <i class="val">90%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">R <i class="val">90%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">PowerBI <i class="val">75%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-          <div class="progress">
-            <span class="skill">Microsoft Excel <i class="val">80%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">SQL <i class="val">95%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">SAS/SPSS<i class="val">55%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div><!-- End Skills -->
-
-    <!-- ======= Interests ======= -->
-    <div class="interests container">
-
-      <div class="section-title">
-        <h2>Interests</h2>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-3 col-md-4">
-          <div class="icon-box">
-            <i class="ri-store-line" style="color: #ffbb2c;"></i>
-            <h3>Machine Learning</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
-            <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i>
-            <h3>Artificial Intelligence</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-          <div class="icon-box">
-            <i class="ri-calendar-todo-line" style="color: #e80368;"></i>
-            <h3>Reinforcement Learning</h3>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-          <div class="icon-box">
-            <i class="ri-paint-brush-line" style="color: #e361ff;"></i>
-            <h3>IOT Programming</h3>
-          </div>
-        </div>
-        
-      </div>
-
-    </div><!-- End Interests -->
-
-    <!-- ======= Testimonials ======= -->
-    <div class="testimonials container">
-
-      <div class="section-title">
-        <h2>Testimonials</h2>
-      </div>
-
-      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                #
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>Saul Goodman</h3>
-              <h4>Ceo &amp; Founder</h4>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                #
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-              <h3>Sara Wilsson</h3>
-              <h4>Designer</h4>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                #
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-              <h3>Jena Karlis</h3>
-              <h4>Store Owner</h4>
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                #
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-              <h3>Matt Brandon</h3>
-              <h4>Freelancer</h4>
-            </div>
-          </div><!-- End testimonial item -->
-
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-
-      <div class="owl-carousel testimonials-carousel">
-
-      </div>
-
-    </div><!-- End Testimonials  -->
-
-  </section><!-- End About Section -->
-
-  <!-- ======= Resume Section ======= -->
-  <section id="resume" class="resume">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Resume</h2>
-        <p>Check My Resume</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <h3 class="resume-title">Sumary</h3>
-          <div class="resume-item pb-0">
-            <h4>Saola Gbenga Ifeoluwa</h4>
-            <p><em>
-              A University of Wolverhampton graduate student skilled in developing and fine-tuning machine 
-              learning and deep learning algorithms. As an operations analyst at SecureID LTD, I am adept at 
-              optimizing revenue performance through strategic scheduling and dashboard development, 
-              resulting in 15% revenue growth and 5% operator performance enhancement. Additionally, I
-              excelled as a data management executive at Ipsos Nigeria LTD, ensuring data quality and 
-              leading quality control efforts for various industries, including FMCGs and government 
-              agencies.
-              
-              I seek an opportunity to work on industry-based AI projects through internship or 
-              fellowships to further enhance my knowledge of how industries implement AI, to further qualify  
-              me for employment in the field of AI.
-              
-            </em></p>
-            <p>
-            <ul>
-              <li>Wolverhampton, Englang, UK</li>
-              <li>+447780250588</li>
-              <li>saolagbengaifeoluwa@gmail.com</li>
-            </ul>
-            </p>
-          </div>
-
-          <h3 class="resume-title">Education</h3>
-          <div class="resume-item">
-            <h4>MSc. Artificial Intelligent</h4>
-            <h5>Ongoing</h5>
-            <p><em>University of Wolverhampton</em></p>
-            <p>My Masters focus on supervised and unsupervised machine learning, mastering R and Python programming, exploring intelligent agent design, learning project management principles, and delving into ethical AI practices. Currently engaged in innovative projects aimed at applying AI technology to address real-world challenges and contribute to societal well-being.</p>
-          </div>
-          <div class="resume-item">
-            <h4>BEng, Civil Engineering</h4>
-            <h5>2014 - 2019</h5>
-            <p><em>Osun State University, Osogbo</em></p>
-            <p>Bachelor's Degree in Civil Engineering graduate, focused on structural, transportation, geotechnical, and environmental engineering. Proficient in project management methodologies tailored for engineering projects. Portfolio highlights expertise in structural analysis, transportation planning, and environmental impact assessments, emphasizing sustainable practices. Dedicated to advancing infrastructure development and promoting environmentally conscious engineering solutions.</p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <h3 class="resume-title">Professional Experience</h3>
-          <div class="resume-item">
-            <h4>Graduate Student</h4>
-            <h5>2023 - Present</h5>
-            <p><em>University of Wolverhampton</em></p>
-            <p>
-            <ul>
-              <li>Developed and fine-tuned supervised and unsupervised machine learning algorithms.</li>
-              <li>Implemented deep learning algorithms with a strong understanding of hyperparameters.</li>
-              <li>Conducted in-depth analysis of AI models to optimize performance and accuracy.</li>
-              <li>Demonstrated proficiency in AI frameworks and libraries such as TensorFlow, PyTorch, or scikit-learn.</li>
-              <li>Completed coursework or projects focused on AI applications in specific domains such as healthcare, finance, or autonomous systems.</li>
-              <li>Leveraged AI techniques for data analysis, feature engineering, and model evaluation in academic and research projects.</li>
-              <li>Actively participated in AI-related seminars, workshops, or meetups to network with professionals and expand knowledge in the field.</li>
-            </ul>
-            </p>
-          </div>
-
-	<div class="resume-item">
-            <h4>Operations Analyst</h4>
-            <h5>2021 - 2024</h5>
-            <p><em>SecureID LTD, Lagos, Nigeria</em></p>
-            <p>
-            <ul>
-              <li>Developed and maintained dashboards to monitor Ops revenue performance for insightful decision-making by Management</li>
-              <li>Led the analysis and planning of daily, weekly, and monthly production schedules to optimize resource utilization and meet budgetary targets.</li>
-              <li>Conducted in-depth assessments of available materials and machine capacity, prioritizing projects based on profitability and market demand dynamics.</li>
-              <li>Collaborated closely with sales teams to identify pricing trends and negotiate contracts for projects, ensuring alignment with revenue goals and profitability targets.</li>
-              <li>Spearheaded the development and implementation of a comprehensive reporting infrastructure using Excel and Power BI, providing key insights into daily sales revenue, production output, operator performance, and machine efficiency, leading to:</li>
-                <ul>
-                    <li>15% revenue growth in Q1 2023 by aligning sales volume and revenue budget with machine capacity.</li>
-                    <li>Improved operator schedule adherence and resource allocation.</li>
-                    <li>Overall operator performance improvement by 5% through data-driven analysis and training initiatives.</li>
-                </ul>
-              <li>Employed data analysis methodologies to identify and address root causes of machine waste, collaborating with cross-functional teams to implement corrective measures.</li>
-              <li>Increased overall customer satisfaction by 10% in Q4 2022 and Q1 2023 by leading surveys and data collection initiatives for internal and external customers, resulting in actionable insights for process improvement.</li>
-              <li>Enhanced data accessibility and integrity by implementing a stopgap database for the Units in Operation, streamlining information flow and decision-making.</li>
-            </ul>
-            </p>
-          </div>
-
-          <div class="resume-item">
-            <h4>Data Management Executive</h4>
-            <h5>2020 - 2021</h5>
-            <p><em>Ipsos Nigeria LTD, Lagos, Nigeria</em></p>
-            <p>
-            <ul>
-              <li>Implemented data quality checks (straight lining, inconsistency, outliers, missing values etc)</li>
-              <li>Identified anomalies in data and returned to Market Intelligent Officers for recollection.</li>
-              <li>Lead a quality control teams for physical verification of suspicious data collected</li>
-              <li>Data Cleaning and wrangling: Validated ad-hoc dataset that were gathered during market surveys, through forensic checks and physical backchecks.</li>
-              <li>Handled data for top organizations across different spheres of businesses like FMCGs, Beverages, health and health care products, local and international government agencies, and public health sectors.</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </section><!-- End Resume Section -->
-
-  <!-- ======= Portfolio Section ======= -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Portfolio</h2>
-        <p>My Works</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-          
-            <li data-filter=".filter-app">Machine Learning</li>
-            <li data-filter=".filter-card">Reinforcement Learning</li>
-            <li data-filter=".filter-web">IOT</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="row portfolio-container">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Deep Learning</h4>
-              <p>Image Classification</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Clustering</h4>
-              <p>Country Dataset</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Neural Network</h4>
-              <p>Rookiey Dataset</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 1</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 3</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Portfolio Section -->
-
-<!-- ======= Contact Section ======= -->
-  <section id="contact" class="contact">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>Contact Me</p>
-      </div>
-
-      <div class="row mt-2">
-
-        <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            <p>Ringwood Road Wolverhampton, England, UK</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-share-alt"></i>
-            <h3>Social Profiles</h3>
-            <div class="social-links">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="https://www.instagram.com/inioluwa_21?igsh=MWI3ZW4yeHJ0bGpyag==" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="https://www.linkedin.com/in/gbenga-ifeoluwa-saola" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-envelope"></i>
-            <h3>Email Me</h3>
-            <p>saolagbengaifeoluwa@gmail.com</p>
-          </div>
-        </div>
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-phone-call"></i>
-            <h3>Call Me</h3>
-            <p>+447780250588</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Include EmailJS library and initialize -->
-
-      <!-- Add form submission event listener -->
-
-      <form id="contact-form" action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-          </div>
-          <div class="col-md-6 form-group mt-3 mt-md-0">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-          </div>
-        </div>
-        <div class="form-group mt-3">
-          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-        </div>
-        <div class="form-group mt-3">
-          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-        </div>
-        <div class="my-3">
-          <!-- <div class="loading">Loading</div> -->
-          <!-- <div class="error-message"></div> -->
-          <div class="sent-message">Your message has been sent. Thank you!</div>
-        </div>
-        <div class="text-center"><button type="submit">Send Message</button></div>
-      </form>
-
-    </div>
-  </section><!-- End Contact Section -->
-
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      emailjs.init({
-        publicKey: "sraYxLrUcvEAq4cIS",
-      });
-    })();
-  
-    window.onload = function() {
-      document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-  
-        // Collect form data
-        const formData = {
-          from_name: this.name.value,
-          from_email: this.email.value,
-          subject: this.subject.value,
-          message: this.message.value,
-          to_name: "Ifeoluwa", // You might need to replace this with the actual recipient's name
-        };
-  
-        // Send form data using EmailJS template
-        emailjs.send('service_thrc1ie', 'template_wifp52l', formData)
-          .then(() => {
-            console.log('SUCCESS!');
-            showFeedbackMessage('.sent-message');
-          }, (error) => {
-            console.log('FAILED...', error);
-            showFeedbackMessage('.error-message');
-          });
-      });
-    }
-  
-    function showFeedbackMessage(selector) {
-      const messageElement = document.querySelector(selector);
-      messageElement.style.display = 'block';
-  
-      // Hide the message after 5 seconds
-      setTimeout(() => {
-        messageElement.style.display = 'none';
-      }, 5000); // Adjust the duration as needed (in milliseconds)
-    }
-  </script>
-  
-
-
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
-    <a href="https://bootstrapmade.com/">Bootstrap</a>
+    <img class="me" src="assets/me.jpg" alt="Portrait of Saola Gbenga Ifeoluwa" width="520" height="520">
   </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <section id="work">
+    <div class="head">
+      <h2>Selected work</h2>
+      <p>Each one is in use. Demos are private: employers get an access code on request, and the demos run on sample data, never on real accounts.</p>
+    </div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <article class="project">
+      <div class="screen">
+        <span class="tally"><span class="dot" aria-hidden="true"></span> PROGRAM</span>
+        <img src="assets/auracast-studio.jpg" alt="AuraCast Studio: cameras, preview, projector and the live program output, with scripture, lyrics and sound panels below" width="1600" height="1000" loading="lazy">
+      </div>
+      <div class="notes">
+        <div class="kicker"><span class="label">Live production</span></div>
+        <h3>AuraCast Studio</h3>
+        <p class="what">A live broadcast and projection studio for churches: cameras in, scripture and songs on the screens, the service out to YouTube.</p>
+        <ul>
+          <li>Native streaming engine for up to 4K, with its own sound engine (Sonic Core) mixing every source</li>
+          <li>Phones become wireless cameras through companion iPhone and Android apps</li>
+          <li>Hears the preacher and shows the verse; songs and the order of service sent on WhatsApp become slides</li>
+          <li>NDI output, a phone remote deck, "Up next" cards, 18 moving backgrounds</li>
+        </ul>
+        <p class="spec">STAGE <b>1920×1080</b> · 30 FPS · H.264 / AAC <b>48 kHz</b> · NDI · YouTube Live</p>
+        <div class="tags"><span>React</span><span>TypeScript</span><span>C++ engine</span><span>FFmpeg</span><span>Electron</span><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
+        <div class="demo"><a class="btn" href="#contact">Ask for demo access</a><small>View-only, with sample songs and verses</small></div>
+      </div>
+    </article>
+
+    <article class="project flip">
+      <div class="screen">
+        <span class="tally"><span class="dot" aria-hidden="true"></span> ON SCREEN</span>
+        <img src="assets/autoverses-screen.jpg" alt="Auto Verses screen showing Romans 8:28-31 on a moving cross background" width="789" height="444" loading="lazy">
+      </div>
+      <div class="notes">
+        <div class="kicker"><span class="label">Speech AI</span></div>
+        <h3>Auto Verses</h3>
+        <p class="what">Listens to the preacher, finds the Bible verses they mention and puts them on the projector and over NDI. Free to use.</p>
+        <ul>
+          <li>Live speech recognition, then a verse finder I designed around how people actually say references</li>
+          <li>Sound-matching for misheard book names: run the words before the numbers together and compare them with all 66 books</li>
+          <li>Finds quotes and paraphrases offline with a sentence-embedding model (MiniLM) over 62,000 verse rows</li>
+          <li>Follows the reading into the next verse; "next verse", "verse 8" and 34 versions by voice</li>
+        </ul>
+        <p class="spec">heard <b>"efficiency 3 6"</b> → Ephesians 3:6 · <b>"Rome ones 8 28"</b> → Romans 8:28 · <b>"Proverbs 98"</b> → 9:8</p>
+        <div class="tags"><span>TypeScript</span><span>Web Speech</span><span>Whisper</span><span>MiniLM</span><span>Transformers.js</span><span>Electron</span><span>NDI</span></div>
+        <div class="demo"><a class="btn" href="#contact">Ask for demo access</a><small>Speak or type in Chrome and watch the verse appear</small></div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="screen">
+        <span class="tally"><span class="dot" aria-hidden="true"></span> APPLYING</span>
+        <div class="mock" role="img" aria-label="Drawing of ApplyPilot's apply flow: a job, the four steps, and suggested CV changes">
+          <div class="row"><span class="pill on">Jobs → My jobs</span><span class="pill">Found for you</span><span class="pill">Search</span></div>
+          <div class="card"><b>Healthcare Assistant · NHS trust</b><span class="label">Applying with: Care roles profile</span></div>
+          <div class="steps">
+            <div><i>1</i>Job description</div>
+            <div><i>2</i>CV for this job</div>
+            <div><i>3</i>Cover letter</div>
+            <div><i>4</i>Fill &amp; submit</div>
+          </div>
+          <div class="card diff"><span>Suggested change</span><span><s>Helped with daily tasks</s> <ins>Supported 12 residents with personal care and mobility, following care plans</ins></span></div>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="kicker"><span class="label">Applied AI</span></div>
+        <h3>ApplyPilot</h3>
+        <p class="what">An AI job tracker and application assistant: it finds the jobs, writes a CV and letter for each one and fills in the form.</p>
+        <ul>
+          <li>Searches public job boards and company careers pages, and watches sites for new roles</li>
+          <li>Tailors the CV to each job description as suggested changes you accept or reject; never invents experience</li>
+          <li>Writes cover letters and NHS-style supporting statements, editable in a normal or a LaTeX editor</li>
+          <li>A Chrome extension fills the application page by page and submits only when you click</li>
+        </ul>
+        <p class="spec">job description → <b>tailored CV</b> → cover letter → <b>fill &amp; submit</b></p>
+        <div class="tags"><span>React</span><span>TypeScript</span><span>Supabase</span><span>Vercel</span><span>Chrome extension</span><span>LLMs</span><span>LaTeX</span></div>
+        <div class="demo"><a class="btn" href="#contact">Ask for demo access</a><small>Demo account with made-up jobs and CVs</small></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="more">
+    <div class="head">
+      <h2>Also built</h2>
+      <p>The platform and engines the products above run on.</p>
+    </div>
+    <div class="more">
+      <div class="tile">
+        <span class="label">Platform</span>
+        <h3>Sanctuary</h3>
+        <p>A multi-church platform: each church gets its own website, member records, events, a WhatsApp inbox and AuraCast, kept apart from every other church. Supabase with 53 cloud functions behind it.</p>
+        <div class="tags"><span>React</span><span>Supabase</span><span>Postgres</span><span>Deno</span><span>Vercel</span></div>
+      </div>
+      <div class="tile">
+        <span class="label">Messaging</span>
+        <h3>WhatsApp inbox &amp; song parsing</h3>
+        <p>Messages sent to a church's WhatsApp number arrive in one inbox. Song lyrics and the order of service are read and turned into slides and timed service items automatically.</p>
+        <div class="tags"><span>WhatsApp Cloud API</span><span>TypeScript</span><span>Parsing</span></div>
+      </div>
+      <div class="tile">
+        <span class="label">Audio &amp; video</span>
+        <h3>Sonic Core and the AuraCast Engine</h3>
+        <p>A real-time sound engine and a native streaming and recording engine, built to keep audio threads free of locks and memory allocation, with a Windows Direct3D path.</p>
+        <div class="tags"><span>C++</span><span>DSP</span><span>FFmpeg (LGPL)</span><span>Direct3D 11</span></div>
+      </div>
+      <div class="tile">
+        <span class="label">Mobile</span>
+        <h3>Phone camera apps</h3>
+        <p>iPhone and Android apps that turn a phone into a wireless camera for the studio, paired with a code and streamed over the local network.</p>
+        <div class="tags"><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="cols">
+      <div>
+        <div class="head"><h2>Experience</h2></div>
+        <div class="timeline">
+          <div class="job">
+            <span class="mono">2023 – now</span>
+            <div><h3>MSc Artificial Intelligence</h3><p class="where">University of Wolverhampton</p>
+              <ul><li>Supervised and unsupervised machine learning, deep learning, intelligent agents and ethical AI, in Python and R</li></ul></div>
+          </div>
+          <div class="job">
+            <span class="mono">2021 – 2024</span>
+            <div><h3>Operations Analyst</h3><p class="where">SecureID Ltd, Lagos</p>
+              <ul>
+                <li>Built Excel and Power BI reporting on sales revenue, production output and machine efficiency</li>
+                <li>15% revenue growth in Q1 2023 by matching sales volume and budget to machine capacity</li>
+                <li>5% better operator performance through data-driven scheduling and training</li>
+              </ul></div>
+          </div>
+          <div class="job">
+            <span class="mono">2020 – 2021</span>
+            <div><h3>Data Management Executive</h3><p class="where">Ipsos Nigeria Ltd, Lagos</p>
+              <ul>
+                <li>Ran data quality checks (straight-lining, inconsistencies, outliers, missing values) on market research for FMCG, healthcare and government clients</li>
+                <li>Led the quality-control team that verified suspicious field data</li>
+              </ul></div>
+          </div>
+          <div class="job">
+            <span class="mono">2014 – 2019</span>
+            <div><h3>BEng Civil Engineering</h3><p class="where">Osun State University, Osogbo</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="skills">
+        <div class="head"><h2>Tools</h2></div>
+        <div><span class="label">AI &amp; data</span><div class="tags"><span>Python</span><span>R</span><span>SQL</span><span>scikit-learn</span><span>PyTorch</span><span>TensorFlow</span><span>Power BI</span><span>SPSS</span></div></div>
+        <div><span class="label">Speech &amp; language</span><div class="tags"><span>Whisper</span><span>Web Speech</span><span>MiniLM embeddings</span><span>Gemini &amp; Claude APIs</span></div></div>
+        <div><span class="label">Product engineering</span><div class="tags"><span>TypeScript</span><span>React</span><span>Node</span><span>Supabase</span><span>Electron</span><span>C++</span><span>Swift</span><span>Kotlin</span></div></div>
+        <div><span class="label">How I work</span><p style="color: var(--muted)">I write the product brief, the rules and the tests, and build with AI coding agents (Claude Code, Gemini), reviewing every change before it ships.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <div>
+        <p class="label">Demo access &amp; roles</p>
+        <h2>Want to try a demo? Ask me for an access code.</h2>
+      </div>
+      <div class="lines">
+        <div class="line"><span id="mail">saolagbengaifeoluwa@gmail.com</span><button class="copy" type="button" data-copy="mail">Copy</button></div>
+        <div class="line"><span id="phone">+44 7780 250588</span><button class="copy" type="button" data-copy="phone">Copy</button></div>
+        <div class="line"><a href="https://www.linkedin.com/in/gbenga-ifeoluwa-saola" target="_blank" rel="noopener">linkedin.com/in/gbenga-ifeoluwa-saola</a><span class="label">LinkedIn</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Saola Gbenga Ifeoluwa · Wolverhampton, UK</span>
+    <span class="mono">Built by hand, no template</span>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.dataset.copy);
+      var text = el.textContent.replace(/\s+(?=\d)/g, ' ');
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); };
+      try {
+        navigator.clipboard.writeText(text).then(done, function () { select(el); });
+      } catch (e) { select(el); }
+    });
+  });
+  function select(el) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+</script>
 
 </body>
-
 </html>
