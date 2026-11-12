@@ -196,16 +196,18 @@ section { padding-block: 72px; border-bottom: 1px solid var(--line); }
 .tile p { color: var(--muted); }
 
 /* experience */
-.timeline { display: grid; gap: 0; }
-.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 24px; padding-block: 22px; border-top: 1px solid var(--line); }
-.job:first-child { border-top: 0; }
+.timeline { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.job { display: grid; grid-template-rows: auto 1fr; gap: 10px; align-content: start; padding: 20px 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.job > .mono { color: var(--onair); font-size: 0.78rem; }
 .job h3 { font-size: var(--step-1); }
 .job .where { color: var(--muted); margin-top: 2px; }
 .job ul { margin: 10px 0 0; padding-left: 1.1em; display: grid; gap: 6px; color: var(--muted); }
 .job li::marker { color: var(--onair); }
 .cols { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 56px; }
-.skills { display: grid; gap: 18px; align-content: start; }
-.skills > div { display: grid; gap: 8px; }
+#experience .cols { grid-template-columns: minmax(0, 1fr); gap: 64px; }
+.skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 16px; align-content: start; }
+.skills > .head { grid-column: 1 / -1; margin-bottom: 8px; }
+.skills > div:not(.head) { display: grid; gap: 10px; align-content: start; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 
 /* contact */
 .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
@@ -282,7 +284,6 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
   .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
   .project.flip .media { order: 0; }
   .more { grid-template-columns: minmax(0, 1fr); }
-  .job { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid3 { grid-template-columns: minmax(0, 1fr); }
   section { padding-block: 52px; }
