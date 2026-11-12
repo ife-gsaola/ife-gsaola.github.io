@@ -726,7 +726,7 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
       if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Please fill in your name, a valid email and a message.', 'bad'); return; }
       if (!ready) { say("The form can't send right now. Please email saolagbengaifeoluwa@gmail.com.", 'bad'); return; }
       btn.disabled = true; say('Sending...');
-      emailjs.send('service_thrc1ie', 'template_wifp52l', {
+      emailjs.send('service_ahlvyd8', 'template_wifp52l', {
         from_name: name, from_email: email, reply_to: email,
         subject: form.subject.value, message: message, to_name: 'Ifeoluwa'
       }).then(function () {
