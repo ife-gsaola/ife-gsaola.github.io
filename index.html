@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <title>Saola Gbenga Ifeoluwa</title>
-<meta name="description" content="Saola Gbenga Ifeoluwa - AI engineer building real products: a live broadcast studio, speech-to-scripture detection and an AI job-application assistant.">
+<meta name="description" content="Saola Gbenga Ifeoluwa - AI engineer building real-time systems: streaming speech recognition with phonetic and embedding search, a native C++ 4K video engine, and LLM application pipelines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -45,6 +45,7 @@ body {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
+html, body { overflow-x: clip; }
 .wrap { max-width: 1120px; margin: 0 auto; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--onair); outline-offset: 3px; border-radius: 4px; }
@@ -63,20 +64,46 @@ p { margin: 0; }
 @media (prefers-reduced-motion: no-preference) { .dot { animation: blink 2.4s ease-in-out infinite; } }
 @keyframes blink { 50% { opacity: 0.35; } }
 
-/* hero */
-.hero { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: end; padding-block: 48px 56px; border-bottom: 1px solid var(--line); }
-.hero h1 { font-size: var(--step-4); font-weight: 800; }
+/* hero: the first screen, framed like a program monitor */
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 56px; align-items: center; min-height: calc(100vh - 80px); min-height: calc(100svh - 80px); padding-block: 40px 64px; border-bottom: 1px solid var(--line); }
+.hero::before { content: ""; position: absolute; inset: 0 -50vw; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(600px 380px at 78% 45%, color-mix(in srgb, var(--onair) 14%, transparent), transparent 70%),
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 48px;
+  opacity: 0.55; mask-image: linear-gradient(transparent, #000 20%, #000 80%, transparent); -webkit-mask-image: linear-gradient(transparent, #000 20%, #000 80%, transparent); }
+.pitch { min-width: 0; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; margin-top: 14px; }
 .hero h1 span { color: var(--onair); }
-.hero .lede { font-size: var(--step-1); color: var(--muted); max-width: 60ch; margin-top: 20px; }
+.hero .lede { font-size: var(--step-1); color: var(--muted); max-width: 58ch; margin-top: 22px; }
 .hero .lede b { color: var(--text); font-weight: 600; }
 .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: var(--step--1); border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; font-family: var(--font-body); }
 .btn.primary { background: var(--onair); border-color: var(--onair); color: var(--onair-ink); }
 .btn:hover { border-color: var(--onair); }
-.me { width: 100%; height: auto; max-width: 260px; aspect-ratio: 1; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); filter: saturate(0.9); }
-.facts { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 36px; }
-.facts div { display: grid; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, max-content)); gap: 12px 40px; margin-top: 40px; }
+.facts div { display: grid; gap: 4px; }
+.facts .label { font-size: 0.68rem; }
 .facts b { font-family: var(--font-display); font-size: var(--step-2); }
+
+.monitor { margin: 0; display: grid; gap: 12px; min-width: 0; }
+.feed { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: radial-gradient(70% 55% at 50% 38%, #2a3550 0%, #151d2c 55%, #0b0f17 100%), #0b0f17; aspect-ratio: 4 / 5; max-width: 100%; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.45); }
+.feed img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+.feed::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(45% 35% at 82% 20%, rgba(245, 165, 36, 0.35), transparent 70%), radial-gradient(40% 30% at 12% 70%, rgba(80, 130, 255, 0.18), transparent 70%); }
+.feed img.cut { position: relative; object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.45)); }
+.feed::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; pointer-events: none; }
+.hud { position: absolute; top: 18px; left: 18px; right: 18px; display: flex; justify-content: space-between; gap: 10px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7); }
+.hud > span { display: inline-flex; align-items: center; gap: 7px; background: rgba(11, 15, 23, 0.55); padding: 4px 9px; border-radius: 999px; }
+.third { position: absolute; left: 18px; right: 18px; bottom: 18px; display: grid; gap: 2px; padding: 10px 14px; border-left: 4px solid #f5a524; background: rgba(11, 15, 23, 0.82); color: #fff; border-radius: 4px; }
+.third b { font-family: var(--font-display); font-size: var(--step-1); }
+.third span { font-size: 0.8rem; color: #c9d1de; }
+.caption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--panel); font-family: var(--font-mono); font-size: 0.82rem; }
+.caption .said { color: var(--muted); }
+.caption q { color: var(--text); }
+.caption .found b { color: var(--onair); font-weight: 500; }
+.caption .label { width: 100%; font-size: 0.68rem; }
+.swap { animation: swap 0.5s ease; }
+@keyframes swap { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 /* sections */
 section { padding-block: 72px; border-bottom: 1px solid var(--line); }
@@ -184,8 +211,9 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
 
 @media (max-width: 860px) {
   .hero, .project, .cols, .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .hero { padding-block: 28px 40px; }
-  .me { max-width: 180px; order: -1; }
+  .hero { min-height: 0; padding-block: 24px 44px; }
+  .monitor { max-width: 420px; }
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 16px; }
   .project.flip .screen { order: 0; }
   .more { grid-template-columns: minmax(0, 1fr); }
   .job { grid-template-columns: minmax(0, 1fr); gap: 6px; }
@@ -216,21 +244,32 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
   </header>
 
   <div class="hero">
-    <div>
+    <div class="pitch">
       <p class="label">Saola Gbenga Ifeoluwa · MSc Artificial Intelligence</p>
       <h1>I build AI products that work <span>live</span>, in front of people.</h1>
-      <p class="lede">A broadcast studio that streams church services in up to 4K. An app that hears a preacher say <b>"turn to Ephesians 3:6"</b> and puts the verse on the screen before the sentence ends. An assistant that tailors a CV to every job and fills in the application. I design each product end to end and build it with AI coding agents.</p>
+      <p class="lede">Real-time systems where AI has to be right the moment it speaks: <b>streaming speech recognition</b> resolved into structured data with phonetic matching and <b>sentence embeddings</b>, a <b>native C++ video engine</b> streaming up to 4K, and <b>LLM pipelines</b> that turn a job description into a tailored application.</p>
       <div class="cta">
         <a class="btn primary" href="#work">See the work</a>
         <a class="btn" href="#contact">Ask for demo access</a>
       </div>
       <div class="facts">
-        <div><b>4</b><span class="label">products shipped</span></div>
-        <div><b>34</b><span class="label">Bible versions by voice</span></div>
-        <div><b>53</b><span class="label">cloud functions in Sanctuary</span></div>
+        <div><b>4K</b><span class="label">native C++ engine</span></div>
+        <div><b>24 MB</b><span class="label">offline embedding model</span></div>
+        <div><b>53</b><span class="label">serverless functions</span></div>
       </div>
     </div>
-    <img class="me" src="assets/me.jpg" alt="Portrait of Saola Gbenga Ifeoluwa" width="520" height="520">
+    <figure class="monitor" aria-label="Portrait of Saola Gbenga Ifeoluwa, framed as a live camera feed">
+      <div class="feed">
+        <img src="assets/me.jpg" alt="Portrait of Saola Gbenga Ifeoluwa" width="520" height="520">
+        <div class="hud"><span><span class="dot" aria-hidden="true"></span> CAM 1 · LIVE</span><span id="tc">00:00:00:00</span></div>
+        <div class="third"><b>Saola Gbenga Ifeoluwa</b><span>AI engineer · MSc AI · Wolverhampton</span></div>
+      </div>
+      <figcaption class="caption">
+        <span class="label">Live ASR → phonetic match → entity</span>
+        <span class="said">heard <q id="said">turn with me to efficiency 3 6</q></span>
+        <span class="found">→ <b id="found">Ephesians 3:6</b></span>
+      </figcaption>
+    </figure>
   </div>
 
   <section id="work">
@@ -245,14 +284,14 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <img src="assets/auracast-studio.jpg" alt="AuraCast Studio: cameras, preview, projector and the live program output, with scripture, lyrics and sound panels below" width="1600" height="1000" loading="lazy">
       </div>
       <div class="notes">
-        <div class="kicker"><span class="label">Live production</span></div>
+        <div class="kicker"><span class="label">Real-time video &amp; audio</span></div>
         <h3>AuraCast Studio</h3>
-        <p class="what">A live broadcast and projection studio for churches: cameras in, scripture and songs on the screens, the service out to YouTube.</p>
+        <p class="what">A desktop live-production system: multi-camera switching, graphics, audio mixing and streaming in one app. It runs every service at my church, on Windows and Mac.</p>
         <ul>
-          <li>Native streaming engine for up to 4K, with its own sound engine (Sonic Core) mixing every source</li>
-          <li>Phones become wireless cameras through companion iPhone and Android apps</li>
-          <li>Hears the preacher and shows the verse; songs and the order of service sent on WhatsApp become slides</li>
-          <li>NDI output, a phone remote deck, "Up next" cards, 18 moving backgrounds</li>
+          <li>Native C++ streaming and recording engine up to 4K: FFmpeg (LGPL) encoding, a Direct3D 11 path on Windows</li>
+          <li>Sonic Core, a real-time audio engine with no locks or memory allocation on the audio thread</li>
+          <li>Phones as wireless cameras over the local network, through native Swift and Kotlin apps</li>
+          <li>Speech-driven graphics, NDI output, a phone remote deck, and messages parsed into slides and running orders</li>
         </ul>
         <p class="spec">STAGE <b>1920×1080</b> · 30 FPS · H.264 / AAC <b>48 kHz</b> · NDI · YouTube Live</p>
         <div class="tags"><span>React</span><span>TypeScript</span><span>C++ engine</span><span>FFmpeg</span><span>Electron</span><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
@@ -266,16 +305,16 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         <img src="assets/autoverses-screen.jpg" alt="Auto Verses screen showing Romans 8:28-31 on a moving cross background" width="789" height="444" loading="lazy">
       </div>
       <div class="notes">
-        <div class="kicker"><span class="label">Speech AI</span></div>
+        <div class="kicker"><span class="label">Speech AI · NLP</span></div>
         <h3>Auto Verses</h3>
-        <p class="what">Listens to the preacher, finds the Bible verses they mention and puts them on the projector and over NDI. Free to use.</p>
+        <p class="what">Real-time speech-to-entity resolution: it turns a live speech stream into exact references as they are spoken, then puts the text on screen and over NDI. It runs on an ordinary laptop for free.</p>
         <ul>
-          <li>Live speech recognition, then a verse finder I designed around how people actually say references</li>
-          <li>Sound-matching for misheard book names: run the words before the numbers together and compare them with all 66 books</li>
-          <li>Finds quotes and paraphrases offline with a sentence-embedding model (MiniLM) over 62,000 verse rows</li>
-          <li>Follows the reading into the next verse; "next verse", "verse 8" and 34 versions by voice</li>
+          <li>Streaming ASR (Web Speech or local Whisper) with interim-result handling, so a result can show before the sentence ends</li>
+          <li>A phonetic matcher built for recognition errors: custom sound keys and edit distance over joined word windows</li>
+          <li>Semantic search with a quantised MiniLM sentence-embedding model, running offline over 62,000 rows</li>
+          <li>Context tracking (it follows the reading, plus voice commands like "next one"), 34 text sources, and 35 automated tests</li>
         </ul>
-        <p class="spec">heard <b>"efficiency 3 6"</b> → Ephesians 3:6 · <b>"Rome ones 8 28"</b> → Romans 8:28 · <b>"Proverbs 98"</b> → 9:8</p>
+        <p class="spec">ASR <b>"efficiency 3 6"</b> → sound key → edit distance → <b>Ephesians 3:6</b> · 27 of 28 misheard names resolved</p>
         <div class="tags"><span>TypeScript</span><span>Web Speech</span><span>Whisper</span><span>MiniLM</span><span>Transformers.js</span><span>Electron</span><span>NDI</span></div>
         <div class="demo"><a class="btn" href="#contact">Ask for demo access</a><small>Speak or type in Chrome and watch the verse appear</small></div>
       </div>
@@ -297,14 +336,14 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         </div>
       </div>
       <div class="notes">
-        <div class="kicker"><span class="label">Applied AI</span></div>
+        <div class="kicker"><span class="label">LLM applications</span></div>
         <h3>ApplyPilot</h3>
-        <p class="what">An AI job tracker and application assistant: it finds the jobs, writes a CV and letter for each one and fills in the form.</p>
+        <p class="what">An LLM pipeline for job applications: it gathers jobs, generates a tailored CV and letter for each, and fills in the form through a browser extension.</p>
         <ul>
-          <li>Searches public job boards and company careers pages, and watches sites for new roles</li>
-          <li>Tailors the CV to each job description as suggested changes you accept or reject; never invents experience</li>
-          <li>Writes cover letters and NHS-style supporting statements, editable in a normal or a LaTeX editor</li>
-          <li>A Chrome extension fills the application page by page and submits only when you click</li>
+          <li>Collects jobs from public APIs and careers-page platforms (Greenhouse, Lever, Ashby) and watches sites for new roles</li>
+          <li>Rewrites the CV per job as reviewable diffs, with guardrails so it never invents experience</li>
+          <li>Generates cover letters and supporting statements, edited in a rich-text or LaTeX editor with an AI assistant</li>
+          <li>A Manifest V3 Chrome extension fills forms page by page and submits only when you click; sign-in uses two-step verification</li>
         </ul>
         <p class="spec">job description → <b>tailored CV</b> → cover letter → <b>fill &amp; submit</b></p>
         <div class="tags"><span>React</span><span>TypeScript</span><span>Supabase</span><span>Vercel</span><span>Chrome extension</span><span>LLMs</span><span>LaTeX</span></div>
@@ -322,13 +361,13 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
       <div class="tile">
         <span class="label">Platform</span>
         <h3>Sanctuary</h3>
-        <p>A multi-church platform: each church gets its own website, member records, events, a WhatsApp inbox and AuraCast, kept apart from every other church. Supabase with 53 cloud functions behind it.</p>
+        <p>A multi-tenant SaaS platform: each organisation gets an isolated website, records, events and messaging. Postgres row-level security keeps tenants apart, with 53 Deno serverless functions on Supabase.</p>
         <div class="tags"><span>React</span><span>Supabase</span><span>Postgres</span><span>Deno</span><span>Vercel</span></div>
       </div>
       <div class="tile">
         <span class="label">Messaging</span>
-        <h3>WhatsApp inbox &amp; song parsing</h3>
-        <p>Messages sent to a church's WhatsApp number arrive in one inbox. Song lyrics and the order of service are read and turned into slides and timed service items automatically.</p>
+        <h3>Messaging &amp; document parsing</h3>
+        <p>A WhatsApp Cloud API inbox with webhooks. Free-form messages (lyrics, running orders) are parsed into structured slides and timed items automatically.</p>
         <div class="tags"><span>WhatsApp Cloud API</span><span>TypeScript</span><span>Parsing</span></div>
       </div>
       <div class="tile">
@@ -340,7 +379,7 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
       <div class="tile">
         <span class="label">Mobile</span>
         <h3>Phone camera apps</h3>
-        <p>iPhone and Android apps that turn a phone into a wireless camera for the studio, paired with a code and streamed over the local network.</p>
+        <p>Native iPhone (Swift) and Android (Kotlin) apps that stream a phone camera to the studio over the local network, paired with a code.</p>
         <div class="tags"><span>Swift</span><span>Kotlin</span><span>WebRTC</span></div>
       </div>
     </div>
@@ -465,6 +504,29 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
 
 <script>
   (function () {
+    var tc = document.getElementById('tc'), said = document.getElementById('said'), found = document.getElementById('found');
+    var t0 = Date.now() - 42 * 60000;
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function tick() { var ms = Date.now() - t0, s = Math.floor(ms / 1000); tc.textContent = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor(s / 60) % 60) + ':' + pad(s % 60) + ':' + pad(Math.floor(ms / 1000 * 30) % 30); }
+    tick();
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setInterval(tick, 1000 / 15);
+    var lines = [
+      ['turn with me to efficiency 3 6', 'Ephesians 3:6'],
+      ['Rome ones 8 28', 'Romans 8:28'],
+      ['for God so loved the world', 'John 3:16 (from the words)'],
+      ['Proverbs chapter 6 plus 9', 'Proverbs 6:9'],
+      ['Matthew 5 4 2 5', 'Matthew 5:4-5']
+    ], i = 0;
+    setInterval(function () {
+      i = (i + 1) % lines.length;
+      said.textContent = lines[i][0]; found.textContent = lines[i][1];
+      [said, found].forEach(function (el) { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); });
+    }, 3200);
+  })();
+</script>
+<script>
+  (function () {
     var root = document.documentElement, btn = document.getElementById('theme'), label = btn.querySelector('span');
     try { var saved = localStorage.getItem('theme'); if (saved === 'light' || saved === 'dark') root.dataset.theme = saved; } catch (e) {}
     function current() {
@@ -502,8 +564,10 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
         subject: form.subject.value, message: message, to_name: 'Ifeoluwa'
       }).then(function () {
         form.reset(); say("Sent. Thank you, I'll reply by email.", 'ok');
-      }, function () {
-        say("It didn't send. Please email saolagbengaifeoluwa@gmail.com instead.", 'bad');
+      }, function (err) {
+        var why = err && (err.status || err.text) ? ' (EmailJS ' + (err.status || '') + (err.text ? ': ' + String(err.text).slice(0, 120) : '') + ')' : '';
+        if (window.console) console.warn('EmailJS send failed', err);
+        say("It didn't send" + why + ". Please email saolagbengaifeoluwa@gmail.com instead.", 'bad');
       }).then(function () { btn.disabled = false; });
     });
   })();
