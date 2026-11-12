@@ -710,31 +710,31 @@ footer { padding-block: 32px 48px; color: var(--muted); font-size: var(--step--1
     show();
   })();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
 <script>
   (function () {
-    var ENDPOINT = 'https://civiiqdphhrpitolstkd.supabase.co/functions/v1/portfolio-contact';
     var form = document.getElementById('contact-form');
     var note = document.getElementById('form-note');
     var btn = form.querySelector('button[type=submit]');
-    var REASONS = { rate: 'Too many messages in a short time. Please try again in a few minutes', fields: 'Please check your name, email and message', not_configured: "The form isn't set up yet", send_failed: "The email service didn't accept it" };
+    var ready = false;
+    try { emailjs.init({ publicKey: 'sraYxLrUcvEAq4cIS' }); ready = true; } catch (e) {}
     function say(text, kind) { note.textContent = text; note.className = 'note' + (kind ? ' ' + kind : ''); }
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
+      if (form.company.value) return; /* a bot filled the hidden field */
       var name = form.name.value.trim(), email = form.email.value.trim(), message = form.message.value.trim();
       if (!name || !message || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('Please fill in your name, a valid email and a message.', 'bad'); return; }
+      if (!ready) { say("The form can't send right now. Please email saolagbengaifeoluwa@gmail.com.", 'bad'); return; }
       btn.disabled = true; say('Sending...');
-      fetch(ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, subject: form.subject.value, message: message, company: form.company.value })
-      }).then(function (r) {
-        return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok && j.ok, status: r.status, error: j.error }; });
-      }).then(function (res) {
-        if (res.ok) { form.reset(); say("Sent. Thank you, I'll reply by email.", 'ok'); return; }
-        var why = REASONS[res.error] || ('error ' + res.status);
-        say(why + '. You can also email saolagbengaifeoluwa@gmail.com.', 'bad');
-      }, function () {
-        say("It couldn't reach the server. Please email saolagbengaifeoluwa@gmail.com instead.", 'bad');
+      emailjs.send('service_thrc1ie', 'template_wifp52l', {
+        from_name: name, from_email: email, reply_to: email,
+        subject: form.subject.value, message: message, to_name: 'Ifeoluwa'
+      }).then(function () {
+        form.reset(); say("Sent. Thank you, I'll reply by email.", 'ok');
+      }, function (err) {
+        var why = err && (err.status || err.text) ? ' (EmailJS ' + (err.status || '') + (err.text ? ': ' + String(err.text).slice(0, 120) : '') + ')' : '';
+        if (window.console) console.warn('EmailJS send failed', err);
+        say("It didn't send" + why + ". Please email saolagbengaifeoluwa@gmail.com instead.", 'bad');
       }).then(function () { btn.disabled = false; });
     });
   })();
